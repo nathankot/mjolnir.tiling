@@ -31,6 +31,7 @@ Currently there are only 2 different layouts, but it's easy to add new ones (PR'
 * Better documentation
 * More layouts
 * Allow globally enabling/disabling layouts
-* Event-based tiling, although requires mjolnir#72
+* Event-based tiling, although requires [sdegutis/mjolnir#72][72]
 
 [mjolnir]: https://github.com/sdegutis/mjolnir
+[72]: https://github.com/sdegutis/mjolnir/issues/72
