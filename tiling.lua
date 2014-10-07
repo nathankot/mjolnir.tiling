@@ -5,9 +5,16 @@ local fnutils = require "mjolnir.fnutils"
 local geometry = require "mjolnir.geometry"
 local alert = require "mjolnir.alert"
 
+local settings = {
+  layouts = { 'main-vertical', 'fullscreen' }
+}
+
 local tiling = {}
-local layouts = { 'main-vertical', 'fullscreen' }
 local spaces = {}
+
+function tiling.set(name, value)
+  settings[name] = value
+end
 
 function tiling.cycle(direction)
   local space = getspace()
@@ -103,8 +110,8 @@ function getspace()
 
   if #spaces == 0 or spaces[1].matches == 0 then
     space.windows = windows
-    space.layoutcycle = fnutils.cycle(layouts)
-    space.layout = layouts[1]
+    space.layoutcycle = fnutils.cycle(settings.layouts)
+    space.layout = settings.layouts[1]
     table.insert(spaces, space)
   else
     space = spaces[1]
