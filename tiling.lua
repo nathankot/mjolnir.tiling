@@ -1,16 +1,22 @@
+local tiling = {}
+
 local application = require "mjolnir.application"
 local window = require "mjolnir.window"
 local screen = require "mjolnir.screen"
 local fnutils = require "mjolnir.fnutils"
 local geometry = require "mjolnir.geometry"
 local alert = require "mjolnir.alert"
-
+local layouts = require "mjolnir.tiling.layouts"
+local spaces = {}
 local settings = {
-  layouts = { 'main-vertical', 'fullscreen' }
+  layouts = {}
 }
 
-local tiling = {}
-local spaces = {}
+local n = 0
+for k, v in pairs(layouts) do
+  n = n + 1
+  settings.layouts[n] = k
+end
 
 function tiling.set(name, value)
   settings[name] = value
@@ -57,35 +63,7 @@ function tiling.promote()
 end
 
 function apply(windows, layout)
-  if layout == 'fullscreen' then
-    fnutils.each(windows, function(window)
-      window:maximize()
-    end)
-  end
-
-  if layout == 'main-vertical' then
-    local wincount = #windows
-
-    if wincount == 1 then
-      return apply(windows, 'fullscreen')
-    end
-
-    for index, win in pairs(windows) do
-      local frame = win:screen():frame()
-
-      if index == 1 then
-        frame.x, frame.y = 0, 0
-        frame.w = frame.w / 2
-      else
-        frame.x = frame.w / 2
-        frame.w = frame.w / 2
-        frame.h = frame.h / (wincount - 1)
-        frame.y = frame.h * (index - 2)
-      end
-
-      win:setframe(frame)
-    end
-  end
+  layouts[layout](windows)
 end
 
 -- Infer a 'space' from our existing spaces

@@ -30,6 +30,7 @@ dependencies = {
 build = {
   type = "builtin",
   modules = {
-    ["mjolnir.tiling"] = "tiling.lua"
+    ["mjolnir.tiling"] = "tiling.lua",
+    ["mjolnir.tiling.layouts"] = "layouts.lua"
   }
 }
