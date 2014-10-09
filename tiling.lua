@@ -68,8 +68,9 @@ end
 
 -- Infer a 'space' from our existing spaces
 function getspace()
+  local mainscreen = screen.mainscreen()
   local windows = fnutils.filter(window.visiblewindows(), function(win)
-    return win:screen():id() == screen.mainscreen():id()
+    return win:screen() == mainscreen and win:isstandard()
   end)
 
   fnutils.each(spaces, function(space)
