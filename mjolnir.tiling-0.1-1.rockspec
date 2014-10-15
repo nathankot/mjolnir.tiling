@@ -4,7 +4,8 @@ version = "0.1-1"
 local url = "github.com/nathankot/mjolnir.tiling"
 
 source = {
-  url = "git://" .. url
+  url = "git://" .. url,
+  tag = "v" .. version
 }
 
 description = {
