@@ -26,10 +26,11 @@ tiling.set('layouts', {
 
 ## Layouts
 
-Currently there are only 2 different layouts, but it's easy to add new ones (PR's welcome!)
+Currently there are only 3 different layouts, but it's easy to add new ones (PR's welcome!)
 
 * fullscreen
 * main-vertical
+* main-horizontal
 
 ## Todo
 
