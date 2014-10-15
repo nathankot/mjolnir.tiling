@@ -4,8 +4,7 @@ version = "0.1-2"
 local url = "github.com/nathankot/mjolnir.tiling"
 
 source = {
-  url = "git://" .. url,
-  tag = "v" .. version
+  url = "git://" .. url
 }
 
 description = {
@@ -31,7 +30,7 @@ dependencies = {
 build = {
   type = "builtin",
   modules = {
-    ["mjolnir.tiling"] = "tiling.lua",
-    ["mjolnir.tiling.layouts"] = "layouts.lua"
+    ["mjolnir.tiling"] = "mjolnir/tiling.lua",
+    ["mjolnir.tiling.layouts"] = "mjolnir/tiling/layouts.lua"
   }
 }
