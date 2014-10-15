@@ -1,5 +1,5 @@
 package = "mjolnir.tiling"
-version = "0.1-2"
+version = "0.1-3"
 
 local url = "github.com/nathankot/mjolnir.tiling"
 
