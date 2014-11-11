@@ -70,7 +70,7 @@ end
 function getspace()
   local mainscreen = screen.mainscreen()
   local windows = fnutils.filter(window.visiblewindows(), function(win)
-    return win:screen() == mainscreen and win:isstandard()
+    return win:screen() == mainscreen and win:isstandard() and #win:title() > 0
   end)
 
   fnutils.each(spaces, function(space)
