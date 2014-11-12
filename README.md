@@ -44,6 +44,16 @@ tiling.addlayout('custom', function(windows)
 end)
 ```
 
+## Contributing
+
+Yes! Please :)
+
+```sh
+git clone https://github.com/nathankot/mjolnir.tiling.git
+cd mjolnir.tiling
+luarocks make <latest .rockspec name>
+```
+
 ## To-do
 
 * Better documentation
