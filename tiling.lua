@@ -8,14 +8,11 @@ local geometry = require "mjolnir.geometry"
 local alert = require "mjolnir.alert"
 local layouts = require "mjolnir.tiling.layouts"
 local spaces = {}
-local settings = {
-  layouts = {}
-}
+local settings = { layouts = {} }
 
-local n = 0
-for k, v in pairs(layouts) do
-  n = n + 1
-  settings.layouts[n] = k
+function tiling.addlayout(name, layout)
+  layouts[name] = layout
+  setlayouts(layouts)
 end
 
 function tiling.set(name, value)
@@ -120,5 +117,15 @@ function syncwindows(windows, newwindows)
 
   return windows
 end
+
+function setlayouts(layouts)
+  local n = 0
+  for k, v in pairs(layouts) do
+    n = n + 1
+    settings.layouts[n] = k
+  end
+end
+
+setlayouts(layouts)
 
 return tiling

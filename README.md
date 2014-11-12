@@ -7,7 +7,7 @@ Add tiling window management powers to your [mjolnir][mjolnir].
 * Spaces and display support
 * Different layouts per space
 
-## Quickstart
+## Quick start
 
 ```lua
 local tiling = require "mjolnir.tiling"
@@ -32,7 +32,19 @@ Currently there are only 3 different layouts, but it's easy to add new ones (PR'
 * main-vertical
 * main-horizontal
 
-## Todo
+### Using custom layouts
+
+You can define your own layouts like so (please see [layouts.lua](/layouts.lua) for definition examples:)
+
+```lua
+tiling.addlayout('custom', function(windows)
+  fnutils.each(windows, function(window)
+    window:maximize()
+  end)
+end)
+```
+
+## To-do
 
 * Better documentation
 * More layouts
