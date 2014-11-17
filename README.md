@@ -44,6 +44,26 @@ tiling.addlayout('custom', function(windows)
 end)
 ```
 
+## Floating Windows
+
+Using `tiling.togglefloat` you can toggle whether or not a window that is on your desktop will be
+included in your tiling calculations. You can optionally pass in a function as a callback to process
+the window if it was tiled.
+
+```lua
+-- Push the window into the exact center of the screen
+local function center(window)
+  frame = window:screen():frame()
+  frame.x = (frame.w / 2) - (frame.w / 4)
+  frame.y = (frame.h / 2) - (frame.h / 4)
+  frame.w = frame.w / 2
+  frame.h = frame.h / 2
+  window:setframe(frame)
+end
+
+hotkey.bind(mash, "f", function() tiling.togglefloat(center) end)
+```
+
 ## Contributing
 
 Yes! Please :)

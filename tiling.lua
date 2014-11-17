@@ -10,6 +10,23 @@ local layouts = require "mjolnir.tiling.layouts"
 local spaces = {}
 local settings = { layouts = {} }
 
+local excluded = {}
+function tiling.togglefloat(floatfn)
+  local win = window:focusedwindow()
+  local id = win:id()
+  excluded[id] = not excluded[id]
+
+  if excluded[id] then
+    if floatfn then floatfn(win) end
+    alert.show("Excluding " .. win:title() .. " from tiles")
+  else
+    alert.show("Adding " .. win:title() .. " to tiles")
+  end
+
+  local space = getspace()
+  apply(space.windows, space.layout)
+end
+
 function tiling.addlayout(name, layout)
   layouts[name] = layout
   setlayouts(layouts)
@@ -27,15 +44,7 @@ function tiling.cycle(direction)
   local currentindex = fnutils.indexof(windows, win)
   local layout = space.layout
   if not currentindex then return end
-  local nextindex = currentindex + direction
-
-  while nextindex > #windows do
-    nextindex = nextindex - #windows
-  end
-
-  while nextindex < 1 do
-    nextindex = #windows + nextindex
-  end
+  local nextindex = (currentindex + direction) % #windows + 1
 
   windows[nextindex]:focus()
   apply(windows, layout)
@@ -53,6 +62,8 @@ function tiling.promote()
   local windows = space.windows
   local win = window:focusedwindow() or windows[1]
   local i = fnutils.indexof(windows, win)
+  if not i then return end
+
   local current = table.remove(windows, i)
   table.insert(windows, 1, current)
   win:focus()
@@ -63,12 +74,17 @@ function apply(windows, layout)
   layouts[layout](windows)
 end
 
+function iswindowincluded(win)
+  onscreen = win:screen() == screen.mainscreen()
+  standard = win:isstandard()
+  hastitle = #win:title() > 0
+  istiling = not excluded[win:id()]
+  return onscreen and standard and hastitle and istiling
+end
+
 -- Infer a 'space' from our existing spaces
 function getspace()
-  local mainscreen = screen.mainscreen()
-  local windows = fnutils.filter(window.visiblewindows(), function(win)
-    return win:screen() == mainscreen and win:isstandard() and #win:title() > 0
-  end)
+  local windows = fnutils.filter(window.visiblewindows(), iswindowincluded)
 
   fnutils.each(spaces, function(space)
     local matches = 0
