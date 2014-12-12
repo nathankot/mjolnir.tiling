@@ -44,7 +44,13 @@ function tiling.cycle(direction)
   local currentindex = fnutils.indexof(windows, win)
   local layout = space.layout
   if not currentindex then return end
-  local nextindex = (currentindex + direction) % #windows + 1
+  if (currentIndex + direction) > size then
+    return 1
+  elseif (currentIndex + direction) < 1 then
+    return size
+  else
+    return currentIndex + direction
+  end
 
   windows[nextindex]:focus()
   apply(windows, layout)
