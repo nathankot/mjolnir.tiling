@@ -24,7 +24,7 @@ layouts['main-vertical'] = function(windows)
       frame.x = frame.w / 2
       frame.w = frame.w / 2
       frame.h = frame.h / (wincount - 1)
-      frame.y = frame.h * (index - 2)
+      frame.y = frame.y + frame.h * (index - 2)
     end
 
     win:setframe(frame)
@@ -45,7 +45,7 @@ layouts['main-horizontal'] = function(windows)
       frame.x, frame.y = 0, 0
       frame.h = frame.h / 2
     else
-      frame.y = frame.h / 2
+      frame.y = frame.y + frame.h / 2
       frame.h = frame.h / 2
       frame.w = frame.w / (wincount - 1)
       frame.x = frame.w * (index - 2)
