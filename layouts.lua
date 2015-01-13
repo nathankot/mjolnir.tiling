@@ -18,10 +18,9 @@ layouts['main-vertical'] = function(windows)
     local frame = win:screen():frame()
 
     if index == 1 then
-      frame.x, frame.y = 0, 0
       frame.w = frame.w / 2
     else
-      frame.x = frame.w / 2
+      frame.x = frame.x + frame.w / 2
       frame.w = frame.w / 2
       frame.h = frame.h / (wincount - 1)
       frame.y = frame.y + frame.h * (index - 2)
@@ -42,13 +41,12 @@ layouts['main-horizontal'] = function(windows)
     local frame = win:screen():frame()
 
     if index == 1 then
-      frame.x, frame.y = 0, 0
       frame.h = frame.h / 2
     else
       frame.y = frame.y + frame.h / 2
       frame.h = frame.h / 2
       frame.w = frame.w / (wincount - 1)
-      frame.x = frame.w * (index - 2)
+      frame.x = frame.x + frame.w * (index - 2)
     end
 
     win:setframe(frame)
