@@ -102,27 +102,27 @@ layouts['gp-vertical'] = function(windows)
   local y = 0
 
   for index, win in pairs(windows) do
-  local frame = win:screen():frame()
+    local frame = win:screen():frame()
 
     if index == 1 then
-    height = frame.h
-    width = frame.w / 2
-  elseif index % 2 == 0 then
-    if index ~= wincount then
-      height = height / 2
+      height = frame.h
+      width  = frame.w / 2
+    elseif index % 2 == 0 then
+      if index ~= wincount then
+        height = height / 2
+      end
+      x = x + width
+    else 
+      if index ~= wincount then
+        width = width / 2
+      end
+      y = y + height
     end
-    x = x + width
-  else 
-    if index ~= wincount then
-      width = width / 2
-    end
-    y = y + height
-  end
   
-  frame.x = frame.x + x
-  frame.y = frame.y + y
-  frame.w = width
-  frame.h = height
+    frame.x = frame.x + x
+    frame.y = frame.y + y
+    frame.w = width
+    frame.h = height
 
     win:setframe(frame)
   end
@@ -141,27 +141,27 @@ layouts['gp-horizontal'] = function(windows)
   local y = 0
 
   for index, win in pairs(windows) do
-  local frame = win:screen():frame()
-
-  if index == 1 then
-    height = frame.h / 2
-    width = frame.w 
-  elseif index % 2 == 0 then
-    if index ~= wincount then
-      width = width / 2
-    end
-    y = y + height
-  else 
-    if index ~= wincount then
-      height = height / 2
-    end
-    x = x + width
-  end
+    local frame = win:screen():frame()
   
-  frame.x = frame.x + x
-  frame.y = frame.y + y
-  frame.w = width
-  frame.h = height
+    if index == 1 then
+      height = frame.h / 2
+      width  = frame.w 
+    elseif index % 2 == 0 then
+      if index ~= wincount then
+        width = width / 2
+      end
+      y = y + height
+    else 
+      if index ~= wincount then
+        height = height / 2
+      end
+      x = x + width
+    end
+  
+    frame.x = frame.x + x
+    frame.y = frame.y + y
+    frame.w = width
+    frame.h = height
 
     win:setframe(frame)
   end
