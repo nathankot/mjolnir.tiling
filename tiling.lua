@@ -36,6 +36,11 @@ function tiling.set(name, value)
   settings[name] = value
 end
 
+function tiling.retile()
+  local space = getspace()
+  apply(space.windows, space.layout)
+end
+
 function tiling.cycle(direction)
   local space = getspace()
   local windows = space.windows
