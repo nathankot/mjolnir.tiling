@@ -24,14 +24,6 @@ tiling.set('layouts', {
 })
 ```
 
-## Layouts
-
-Currently there are only 3 different layouts, but it's easy to add new ones (PR's welcome!)
-
-* fullscreen
-* main-vertical
-* main-horizontal
-
 ### Using custom layouts
 
 You can define your own layouts like so (please see [layouts.lua](/layouts.lua) for definition examples:)
@@ -64,6 +56,39 @@ end
 hotkey.bind(mash, "f", function() tiling.togglefloat(center) end)
 ```
 
+## Layouts
+
+These are the layouts that come with `mjolnir.tiling`:
+
+### `fullscreen`
+
+![fullscreen](https://raw.github.com/nathankot/mjolnir.tiling/master/screenshots/fullscreen.png)
+
+### `main-vertical`
+
+![main-vertical](https://raw.github.com/nathankot/mjolnir.tiling/master/screenshots/main-vertical.png)
+
+### `main-horizontal`
+
+![main-horizontal](https://raw.github.com/nathankot/mjolnir.tiling/master/screenshots/main-horizontal.png)
+
+### `rows`
+
+![rows](https://raw.github.com/nathankot/mjolnir.tiling/master/screenshots/rows.png)
+
+### `columns`
+
+![columns](https://raw.github.com/nathankot/mjolnir.tiling/master/screenshots/columns.png)
+
+### `gp-vertical` _(geometric progression)_
+
+![gp-vertical](https://raw.github.com/nathankot/mjolnir.tiling/master/screenshots/gp-vertical.png)
+
+### `gp-horizontal` _(geometric progression)_
+
+![gp-horizontal](https://raw.github.com/nathankot/mjolnir.tiling/master/screenshots/gp-horizontal.png)
+
+
 ## Contributing
 
 Yes! Please :)
@@ -74,12 +99,22 @@ cd mjolnir.tiling
 luarocks make <latest .rockspec name>
 ```
 
+## Contributors
+
+* [csaunders](https://github.com/csaunders)
+* [acmcelwee](https://github.com/acmcelwee)
+* [iveney](https://github.com/iveney)
+* [mavant](https://github.com/mavant)
+* [OrBaruk](https://github.com/OrBaruk)
+
+Thanks <3
+
 ## To-do
 
-* Better documentation
-* More layouts
-* ~~Allow globally enabling/disabling layouts~~
-* Event-based tiling, although requires [sdegutis/mjolnir#72][72]
+* [ ] Better documentation
+* [x] More layouts
+* [x] Allow globally enabling/disabling layouts
+* [ ] Event-based tiling, although requires [sdegutis/mjolnir#72][72]
 
 [mjolnir]: https://github.com/sdegutis/mjolnir
 [72]: https://github.com/sdegutis/mjolnir/issues/72
