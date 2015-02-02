@@ -9,6 +9,12 @@ Add tiling window management powers to your [mjolnir][mjolnir].
 
 ## Quick start
 
+First up, install [Mjolnir](https://github.com/sdegutis/mjolnir) if you haven't already.
+
+Then install `mjolnir.tiling` using luarocks: `luarocks install mjolnir.tiling`
+
+In your `~/.mjolnir/init.lua`:
+
 ```lua
 local tiling = require "mjolnir.tiling"
 local mash = {"ctrl", "cmd"}
@@ -24,7 +30,11 @@ tiling.set('layouts', {
 })
 ```
 
-### Using custom layouts
+## Updating
+
+To update to the latest `mjolnir.tiling`, just run: `luarocks install mjolnir.tiling`
+
+## Using custom layouts
 
 You can define your own layouts like so (please see [layouts.lua](/layouts.lua) for definition examples:)
 
@@ -93,7 +103,7 @@ Thanks <3
 
 ## To-do
 
-* [ ] Better documentation
+* [x] Better documentation
 * [x] More layouts
 * [x] Allow globally enabling/disabling layouts
 * [ ] Event-based tiling, although requires [sdegutis/mjolnir#72][72]
