@@ -60,33 +60,15 @@ hotkey.bind(mash, "f", function() tiling.togglefloat(center) end)
 
 These are the layouts that come with `mjolnir.tiling`:
 
-### `fullscreen`
-
-![fullscreen](https://raw.github.com/nathankot/mjolnir.tiling/master/screenshots/fullscreen.png)
-
-### `main-vertical`
-
-![main-vertical](https://raw.github.com/nathankot/mjolnir.tiling/master/screenshots/main-vertical.png)
-
-### `main-horizontal`
-
-![main-horizontal](https://raw.github.com/nathankot/mjolnir.tiling/master/screenshots/main-horizontal.png)
-
-### `rows`
-
-![rows](https://raw.github.com/nathankot/mjolnir.tiling/master/screenshots/rows.png)
-
-### `columns`
-
-![columns](https://raw.github.com/nathankot/mjolnir.tiling/master/screenshots/columns.png)
-
-### `gp-vertical` _(geometric progression)_
-
-![gp-vertical](https://raw.github.com/nathankot/mjolnir.tiling/master/screenshots/gp-vertical.png)
-
-### `gp-horizontal` _(geometric progression)_
-
-![gp-horizontal](https://raw.github.com/nathankot/mjolnir.tiling/master/screenshots/gp-horizontal.png)
+Name						                            | Screenshot
+------------------------------------------- | ------------------------------------
+`fullscreen`		                            | ![fullscreen](https://raw.github.com/nathankot/mjolnir.tiling/master/screenshots/fullscreen.png)
+`main-vertical`                             | ![main-vertical](https://raw.github.com/nathankot/mjolnir.tiling/master/screenshots/main-vertical.png)
+`main-horizontal`                           | ![main-horizontal](https://raw.github.com/nathankot/mjolnir.tiling/master/screenshots/main-horizontal.png)
+`rows`                                      | ![rows](https://raw.github.com/nathankot/mjolnir.tiling/master/screenshots/rows.png)
+`columns`                                   | ![columns](https://raw.github.com/nathankot/mjolnir.tiling/master/screenshots/columns.png)
+`gp-vertical`                               | ![gp-vertical](https://raw.github.com/nathankot/mjolnir.tiling/master/screenshots/gp-vertical.png)
+`gp-horizontal`                             | ![gp-horizontal](https://raw.github.com/nathankot/mjolnir.tiling/master/screenshots/gp-horizontal.png)
 
 
 ## Contributing
