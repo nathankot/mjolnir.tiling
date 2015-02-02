@@ -4,8 +4,9 @@ Add tiling window management powers to your [mjolnir][mjolnir].
 
 ## Features
 
-* Spaces and display support
-* Different layouts per space
+* Different layouts per space ([with this magic][magic])
+* Multi-monitor supported
+* Custom layouts
 
 ## Quick start
 
@@ -106,7 +107,9 @@ Thanks <3
 * [x] Better documentation
 * [x] More layouts
 * [x] Allow globally enabling/disabling layouts
+* [ ] Functions to move windows across spaces
 * [ ] Event-based tiling, although requires [sdegutis/mjolnir#72][72]
 
 [mjolnir]: https://github.com/sdegutis/mjolnir
 [72]: https://github.com/sdegutis/mjolnir/issues/72
+[magic]: https://github.com/nathankot/mjolnir.tiling/blob/953c22a43ba56362a635d83a4455f4bc92e6546a/tiling.lua#L95-L124
