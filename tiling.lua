@@ -61,10 +61,22 @@ function tiling.cycle(direction)
 end
 
 function tiling.cyclelayout()
+  local x = os.clock()
   local space = getspace()
+  local y = os.clock()
+  print(string.format("getspace time: %.2f\n", y - x))
+
+  x = os.clock()
   space.layout = space.layoutcycle()
-  alert.show(space.layout, 1)
+  y = os.clock()
+  print(string.format("layoutcycle time: %.2f\n", y - x))
+
+  x = os.clock()
   apply(space.windows, space.layout)
+  y = os.clock()
+  print(string.format("apply time: %.2f\n", y - x))
+
+  alert.show(space.layout, 1)
 end
 
 function tiling.promote()
@@ -94,8 +106,12 @@ end
 
 -- Infer a 'space' from our existing spaces
 function getspace()
+  x = os.clock()
   local windows = fnutils.filter(window.visiblewindows(), iswindowincluded)
+  y = os.clock()
+  print(string.format("fnutils.filter time: %.2f\n", y - x))
 
+  x = os.clock()
   fnutils.each(spaces, function(space)
     local matches = 0
     fnutils.each(space.windows, function(win)
@@ -103,23 +119,32 @@ function getspace()
     end)
     space.matches = matches
   end)
+  y = os.clock()
+  print(string.format("fnutils.each time: %.2f\n", y - x))
 
-  table.sort(spaces, function(a, b)
-    return a.matches > b.matches
-  end)
+  x = os.clock()
+  table.sort(spaces, function(a, b) return a.matches > b.matches end)
+  y = os.clock()
+  print(string.format("table.sort time: %.2f\n", y - x))
 
   local space = {}
 
   if #spaces == 0 or spaces[1].matches == 0 then
+    x = os.clock()
     space.windows = windows
     space.layoutcycle = fnutils.cycle(settings.layouts)
     space.layout = settings.layouts[1]
     table.insert(spaces, space)
+    y = os.clock()
+    print(string.format("space creation time: %.2f\n", y - x))
   else
     space = spaces[1]
   end
 
+  x = os.clock()
   space.windows = syncwindows(space.windows, windows)
+  y = os.clock()
+  print(string.format("syncwindows time: %.2f\n", y - x))
   return space
 end
 
