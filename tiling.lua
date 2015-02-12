@@ -7,6 +7,7 @@ local fnutils = require "mjolnir.fnutils"
 local geometry = require "mjolnir.geometry"
 local alert = require "mjolnir.alert"
 local layouts = require "mjolnir.tiling.layouts"
+local socket = require "socket"
 local spaces = {}
 local settings = { layouts = {} }
 
@@ -61,20 +62,20 @@ function tiling.cycle(direction)
 end
 
 function tiling.cyclelayout()
-  local x = os.clock()
+  local x = socket.gettime()
   local space = getspace()
-  local y = os.clock()
-  print(string.format("getspace time: %.2f\n", y - x))
+  local y = socket.gettime()
+  print(string.format("getspace time: %.6f\n", y - x))
 
-  x = os.clock()
+  x = socket.gettime()
   space.layout = space.layoutcycle()
-  y = os.clock()
-  print(string.format("layoutcycle time: %.2f\n", y - x))
+  y = socket.gettime()
+  print(string.format("layoutcycle time: %.6f\n", y - x))
 
-  x = os.clock()
+  x = socket.gettime()
   apply(space.windows, space.layout)
-  y = os.clock()
-  print(string.format("apply time: %.2f\n", y - x))
+  y = socket.gettime()
+  print(string.format("apply time: %.6f\n", y - x))
 
   alert.show(space.layout, 1)
 end
@@ -97,21 +98,37 @@ function apply(windows, layout)
 end
 
 function iswindowincluded(win)
+  x = socket.gettime()
   onscreen = win:screen() == screen.mainscreen()
+  y = socket.gettime()
+  print(string.format("win:screen time: %.6f\n", y - x))
+
+  x = socket.gettime()
   standard = win:isstandard()
+  y = socket.gettime()
+  print(string.format("win:isstandard time: %.6f\n", y - x))
+
+  x = socket.gettime()
   hastitle = #win:title() > 0
-  istiling = not excluded[win:id()]
+  y = socket.gettime()
+  print(string.format("#win:title time: %.6f\n", y - x))
+
+  x = socket.gettime()
+  istiling = #excluded == 0 or not excluded[win:id()]
+  y = socket.gettime()
+  print(string.format("excluded[win time: %.6f\n", y - x))
+
   return onscreen and standard and hastitle and istiling
 end
 
 -- Infer a 'space' from our existing spaces
 function getspace()
-  x = os.clock()
+  x = socket.gettime()
   local windows = fnutils.filter(window.visiblewindows(), iswindowincluded)
-  y = os.clock()
-  print(string.format("fnutils.filter time: %.2f\n", y - x))
+  y = socket.gettime()
+  print(string.format("fnutils.filter time: %.6f\n", y - x))
 
-  x = os.clock()
+  x = socket.gettime()
   fnutils.each(spaces, function(space)
     local matches = 0
     fnutils.each(space.windows, function(win)
@@ -119,32 +136,32 @@ function getspace()
     end)
     space.matches = matches
   end)
-  y = os.clock()
-  print(string.format("fnutils.each time: %.2f\n", y - x))
+  y = socket.gettime()
+  print(string.format("fnutils.each time: %.6f\n", y - x))
 
-  x = os.clock()
+  x = socket.gettime()
   table.sort(spaces, function(a, b) return a.matches > b.matches end)
-  y = os.clock()
-  print(string.format("table.sort time: %.2f\n", y - x))
+  y = socket.gettime()
+  print(string.format("table.sort time: %.6f\n", y - x))
 
   local space = {}
 
   if #spaces == 0 or spaces[1].matches == 0 then
-    x = os.clock()
+    x = socket.gettime()
     space.windows = windows
     space.layoutcycle = fnutils.cycle(settings.layouts)
     space.layout = settings.layouts[1]
     table.insert(spaces, space)
-    y = os.clock()
-    print(string.format("space creation time: %.2f\n", y - x))
+    y = socket.gettime()
+    print(string.format("space creation time: %.6f\n", y - x))
   else
     space = spaces[1]
   end
 
-  x = os.clock()
+  x = socket.gettime()
   space.windows = syncwindows(space.windows, windows)
-  y = os.clock()
-  print(string.format("syncwindows time: %.2f\n", y - x))
+  y = socket.gettime()
+  print(string.format("syncwindows time: %.6f\n", y - x))
   return space
 end
 
