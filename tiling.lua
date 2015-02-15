@@ -124,7 +124,23 @@ end
 -- Infer a 'space' from our existing spaces
 function getspace()
   local x = socket.gettime()
-  local windows = fnutils.filter(window.visiblewindows(), iswindowincluded)
+  -- Call application.allwindows() ourselves to get timing information
+  -- per application, instead of indirectly calling it through
+  -- window.visiblewindows()
+  print("Timing application.allwindows")
+  local allwindows = fnutils.mapcat(
+     application.runningapplications(),
+     function(app)
+        local x = socket.gettime()
+        local allwindows = application.allwindows(app)
+        local y = socket.gettime()
+        print(string.format("application.allwindows time for %s: %.6f",
+                            app:title(), y - x))
+        return allwindows
+  end)
+  print("\n")
+  local visiblewindows = fnutils.filter(allwindows, window.isvisible)
+  local windows = fnutils.filter(visiblewindows, iswindowincluded)
   local y = socket.gettime()
   print(string.format("fnutils.filter time: %.6f\n", y - x))
 
