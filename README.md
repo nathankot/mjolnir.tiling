@@ -13,7 +13,7 @@ When I say that this is a port, I mean something quite minimal. I replaced
 references to mjolnir extensions (e.g., `mjolnir.window`) with references to
 the corresponding hammerspoon extensions (e.g., `hs.window`). I rewrote
 function calls in camelCase where necessary. I renamed `tiling.lua` to
-`init.lua`.
+`init.lua`. It seems to work.
 
 [hammerspoon]: https://github.com/Hammerspoon/hammerspoon
 
