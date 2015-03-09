@@ -11,10 +11,13 @@ to the beginning of your init.lua.
 
 When I say that this is a port, I mean something quite minimal. I replaced
 references to mjolnir extensions (e.g., `mjolnir.window`) with references to
-the corresponding hammerspoon  extensions (e.g., `hs.window`), and I rewrote
-function calls in camelCase where necessary.
+the corresponding hammerspoon extensions (e.g., `hs.window`). I rewrote
+function calls in camelCase where necessary. I renamed `tiling.lua` to
+`init.lua`.
 
 [hammerspoon]: https://github.com/Hammerspoon/hammerspoon
+
+Below is the content of the README from mjolnir.tiling.
 
 # mjolnir.tiling
 
