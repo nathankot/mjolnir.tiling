@@ -1,4 +1,4 @@
-local fnutils = require "mjolnir.fnutils"
+local fnutils = require "hs.fnutils"
 local layouts = {}
 
 layouts['fullscreen'] = function(windows)
@@ -26,7 +26,7 @@ layouts['main-vertical'] = function(windows)
       frame.y = frame.y + frame.h * (index - 2)
     end
 
-    win:setframe(frame)
+    win:setFrame(frame)
   end
 end
 
@@ -49,7 +49,7 @@ layouts['main-horizontal'] = function(windows)
       frame.x = frame.x + frame.w * (index - 2)
     end
 
-    win:setframe(frame)
+    win:setFrame(frame)
   end
 end
 
@@ -67,7 +67,7 @@ layouts['columns'] = function(windows)
     frame.x = frame.x + (index - 1) * frame.w
     frame.y = 0
 
-    win:setframe(frame)
+    win:setFrame(frame)
   end
 end
 
@@ -85,7 +85,7 @@ layouts['rows'] = function(windows)
     frame.y = frame.y + (index - 1) * frame.h
     frame.x = 0
 
-    win:setframe(frame)
+    win:setFrame(frame)
   end
 end
 
@@ -124,7 +124,7 @@ layouts['gp-vertical'] = function(windows)
     frame.w = width
     frame.h = height
 
-    win:setframe(frame)
+    win:setFrame(frame)
   end
 end
 
@@ -163,7 +163,7 @@ layouts['gp-horizontal'] = function(windows)
     frame.w = width
     frame.h = height
 
-    win:setframe(frame)
+    win:setFrame(frame)
   end
 end
 

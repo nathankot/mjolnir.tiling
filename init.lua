@@ -1,18 +1,18 @@
 local tiling = {}
 
-local application = require "mjolnir.application"
-local window = require "mjolnir.window"
-local screen = require "mjolnir.screen"
-local fnutils = require "mjolnir.fnutils"
-local geometry = require "mjolnir.geometry"
-local alert = require "mjolnir.alert"
-local layouts = require "mjolnir.tiling.layouts"
+local application = require "hs.application"
+local window = require "hs.window"
+local screen = require "hs.screen"
+local fnutils = require "hs.fnutils"
+local geometry = require "hs.geometry"
+local alert = require "hs.alert"
+local layouts = require "hs.tiling.layouts"
 local spaces = {}
 local settings = { layouts = {} }
 
 local excluded = {}
 function tiling.togglefloat(floatfn)
-  local win = window:focusedwindow()
+  local win = window:focusedWindow()
   local id = win:id()
   excluded[id] = not excluded[id]
 
@@ -37,16 +37,16 @@ function tiling.set(name, value)
 end
 
 function tiling.retile()
-  local space = getspace()
+  local space = getSpace()
   apply(space.windows, space.layout)
 end
 
 function tiling.cycle(direction)
   local space = getspace()
   local windows = space.windows
-  local win = window:focusedwindow() or windows[1]
+  local win = window:focusedWindow() or windows[1]
   local direction = direction or 1
-  local currentindex = fnutils.indexof(windows, win)
+  local currentindex = fnutils.indexOf(windows, win)
   local layout = space.layout
   if not currentindex then return end
   nextindex = currentindex + direction
@@ -70,8 +70,8 @@ end
 function tiling.promote()
   local space = getspace()
   local windows = space.windows
-  local win = window:focusedwindow() or windows[1]
-  local i = fnutils.indexof(windows, win)
+  local win = window:focusedWindow() or windows[1]
+  local i = fnutils.indexOf(windows, win)
   if not i then return end
 
   local current = table.remove(windows, i)
@@ -85,8 +85,8 @@ function apply(windows, layout)
 end
 
 function iswindowincluded(win)
-  onscreen = win:screen() == screen.mainscreen()
-  standard = win:isstandard()
+  onscreen = win:screen() == screen.mainScreen()
+  standard = win:isStandard()
   hastitle = #win:title() > 0
   istiling = not excluded[win:id()]
   return onscreen and standard and hastitle and istiling
@@ -94,7 +94,7 @@ end
 
 -- Infer a 'space' from our existing spaces
 function getspace()
-  local windows = fnutils.filter(window.visiblewindows(), iswindowincluded)
+  local windows = fnutils.filter(window.visibleWindows(), iswindowincluded)
 
   fnutils.each(spaces, function(space)
     local matches = 0
@@ -138,7 +138,7 @@ function syncwindows(windows, newwindows)
 
   -- Remove any bad windows
   windows = fnutils.filter(windows, function(win)
-    return win:isstandard()
+    return win:isStandard()
   end)
 
   return windows

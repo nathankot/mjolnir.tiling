@@ -1,3 +1,21 @@
+# hs.tiling
+
+This is a port of mjolnir.tiling for use with [hammerspoon][hammerspoon]. To
+install, clone the directory into `$HOME/.hammerspoon/hs/tiling`, and add,
+
+```lua
+local tiling = require "hs.tiling"
+```
+
+to the beginning of your init.lua.
+
+When I say that this is a port, I mean something quite minimal. I replaced
+references to mjolnir extensions (e.g., `mjolnir.window`) with references to
+the corresponding hammerspoon  extensions (e.g., `hs.window`), and I rewrote
+function calls in camelCase where necessary.
+
+[hammerspoon]: https://github.com/Hammerspoon/hammerspoon
+
 # mjolnir.tiling
 
 Add tiling window management powers to your [mjolnir][mjolnir].
