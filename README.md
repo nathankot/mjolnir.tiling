@@ -1,6 +1,6 @@
 # hs.tiling
 
-Add tiling window management powers to your [hammerspoon][hammerspoon].
+Add tiling window management powers to your [hammerspoon][hammerspoon]. (Fork of nathankot's [mjolnir.tiling](https://github.com/nathankot/mjolnir.tiling).)
 
 ## Features
 
@@ -103,19 +103,23 @@ cd hs.tiling
 
 ## Contributors
 
+This is a port of [nathankot's](https://github.com/nathankot) [mjolnir.tiling][mjolnir.tiling].
+
+I replaced
+references to mjolnir extensions (e.g., `mjolnir.window`) with references to
+the corresponding hammerspoon extensions (e.g., `hs.window`). I rewrote
+function calls in camelCase where necessary. I renamed `tiling.lua` to
+`init.lua`. It seems to work.
+
+Nathan lists, as contributors to mjolnir.tiling,
+
 * [csaunders](https://github.com/csaunders)
 * [acmcelwee](https://github.com/acmcelwee)
 * [iveney](https://github.com/iveney)
 * [mavant](https://github.com/mavant)
 * [OrBaruk](https://github.com/OrBaruk)
 
-Thanks <3
-
-This is a port of [mjolnir.tiling][mjolnir.tiling] for use with [hammerspoon][hammerspoon]. When I say that this is a port, I mean something quite minimal. I replaced
-references to mjolnir extensions (e.g., `mjolnir.window`) with references to
-the corresponding hammerspoon extensions (e.g., `hs.window`). I rewrote
-function calls in camelCase where necessary. I renamed `tiling.lua` to
-`init.lua`. It seems to work.
+Thanks to Nathan and all these contributors for making mjolnir.tiling, and making it so easy to port over to hammerspoon!
 
 ## To-do
 
