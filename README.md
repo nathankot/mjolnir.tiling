@@ -1,27 +1,6 @@
 # hs.tiling
 
-This is a port of mjolnir.tiling for use with [hammerspoon][hammerspoon]. To
-install, clone the directory into `$HOME/.hammerspoon/hs/tiling`, and add,
-
-```lua
-local tiling = require "hs.tiling"
-```
-
-to the beginning of your init.lua.
-
-When I say that this is a port, I mean something quite minimal. I replaced
-references to mjolnir extensions (e.g., `mjolnir.window`) with references to
-the corresponding hammerspoon extensions (e.g., `hs.window`). I rewrote
-function calls in camelCase where necessary. I renamed `tiling.lua` to
-`init.lua`. It seems to work.
-
-[hammerspoon]: https://github.com/Hammerspoon/hammerspoon
-
-Below is the content of the README from mjolnir.tiling.
-
-# mjolnir.tiling
-
-Add tiling window management powers to your [mjolnir][mjolnir].
+Add tiling window management powers to your [hammerspoon][hammerspoon].
 
 ## Features
 
@@ -31,14 +10,19 @@ Add tiling window management powers to your [mjolnir][mjolnir].
 
 ## Quick start
 
-First up, install [Mjolnir](https://github.com/sdegutis/mjolnir) if you haven't already.
+First up, install [Hammerspoon][hammerspoon] if you haven't already.
 
-Then install `mjolnir.tiling` using luarocks: `luarocks install mjolnir.tiling`
+Then install `hs.tiling` by cloning into your hammerspoon configuration directory:
 
-In your `~/.mjolnir/init.lua`:
+```
+mkdir -p $HOME/.hammerspoon/hs
+git clone https://github.com/dsanson/hs.tiling $HOME/.hammerspoon/hs/tiling
+```
+
+In your `~/.hammerspoon/init.lua`:
 
 ```lua
-local tiling = require "mjolnir.tiling"
+local tiling = require "hs.tiling"
 local mash = {"ctrl", "cmd"}
 
 hotkey.bind(mash, "c", function() tiling.cyclelayout() end)
@@ -54,7 +38,12 @@ tiling.set('layouts', {
 
 ## Updating
 
-To update to the latest `mjolnir.tiling`, just run: `luarocks install mjolnir.tiling`
+To update to the latest `hs.tiling`, pull the latest from git:
+
+```
+cd $HOME/.hammerspoon/hs/tiling
+git pull
+```
 
 ## Using custom layouts
 
@@ -90,17 +79,17 @@ hotkey.bind(mash, "f", function() tiling.togglefloat(center) end)
 
 ## Layouts
 
-These are the layouts that come with `mjolnir.tiling`:
+These are the layouts that come with `hs.tiling`:
 
 Name						                            | Screenshot
 ------------------------------------------- | ------------------------------------
-`fullscreen`		                            | ![fullscreen](https://raw.github.com/nathankot/mjolnir.tiling/master/screenshots/fullscreen.png)
-`main-vertical`                             | ![main-vertical](https://raw.github.com/nathankot/mjolnir.tiling/master/screenshots/main-vertical.png)
-`main-horizontal`                           | ![main-horizontal](https://raw.github.com/nathankot/mjolnir.tiling/master/screenshots/main-horizontal.png)
-`rows`                                      | ![rows](https://raw.github.com/nathankot/mjolnir.tiling/master/screenshots/rows.png)
-`columns`                                   | ![columns](https://raw.github.com/nathankot/mjolnir.tiling/master/screenshots/columns.png)
-`gp-vertical`                               | ![gp-vertical](https://raw.github.com/nathankot/mjolnir.tiling/master/screenshots/gp-vertical.png)
-`gp-horizontal`                             | ![gp-horizontal](https://raw.github.com/nathankot/mjolnir.tiling/master/screenshots/gp-horizontal.png)
+`fullscreen`		                            | ![fullscreen](https://raw.github.com/dsanson/hs.tiling/master/screenshots/fullscreen.png)
+`main-vertical`                             | ![main-vertical](https://raw.github.com/dsanson/hs.tiling/master/screenshots/main-vertical.png)
+`main-horizontal`                           | ![main-horizontal](https://raw.github.com/dsanson/hs.tiling/master/screenshots/main-horizontal.png)
+`rows`                                      | ![rows](https://raw.github.com/dsanson/hs.tiling/master/screenshots/rows.png)
+`columns`                                   | ![columns](https://raw.github.com/dsanson/hs.tiling/master/screenshots/columns.png)
+`gp-vertical`                               | ![gp-vertical](https://raw.github.com/dsanson/hs.tiling/master/screenshots/gp-vertical.png)
+`gp-horizontal`                             | ![gp-horizontal](https://raw.github.com/dsanson/hs.tiling/master/screenshots/gp-horizontal.png)
 
 
 ## Contributing
@@ -108,9 +97,8 @@ Name						                            | Screenshot
 Yes! Please :)
 
 ```sh
-git clone https://github.com/nathankot/mjolnir.tiling.git
-cd mjolnir.tiling
-luarocks make <latest .rockspec name>
+git clone https://github.com/dsanson/hs.tiling.git
+cd hs.tiling
 ```
 
 ## Contributors
@@ -123,6 +111,12 @@ luarocks make <latest .rockspec name>
 
 Thanks <3
 
+This is a port of [mjolnir.tiling][mjolnir.tiling] for use with [hammerspoon][hammerspoon]. When I say that this is a port, I mean something quite minimal. I replaced
+references to mjolnir extensions (e.g., `mjolnir.window`) with references to
+the corresponding hammerspoon extensions (e.g., `hs.window`). I rewrote
+function calls in camelCase where necessary. I renamed `tiling.lua` to
+`init.lua`. It seems to work.
+
 ## To-do
 
 * [x] Better documentation
@@ -131,9 +125,10 @@ Thanks <3
 * [ ] Functions to move windows across spaces
 * [ ] Event-based tiling, although requires [sdegutis/mjolnir#72][72]
 
-[mjolnir]: https://github.com/sdegutis/mjolnir
 [72]: https://github.com/sdegutis/mjolnir/issues/72
-[magic]: https://github.com/nathankot/mjolnir.tiling/blob/953c22a43ba56362a635d83a4455f4bc92e6546a/tiling.lua#L95-L124
+[magic]: https://github.com/dsanson/hs.tiling/blob/master/init.lua#L95-L124
+[hammerspoon]: https://github.com/Hammerspoon/hammerspoon
+[mjolnir.tiling]: https://github.com/nathankot/mjolnir.tiling
 
 ## License
 
