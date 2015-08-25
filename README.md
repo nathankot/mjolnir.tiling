@@ -24,6 +24,7 @@ hotkey.bind(mash, "c", function() tiling.cyclelayout() end)
 hotkey.bind(mash, "j", function() tiling.cycle(1) end)
 hotkey.bind(mash, "k", function() tiling.cycle(-1) end)
 hotkey.bind(mash, "space", function() tiling.promote() end)
+hotkey.bind(mash, "f", function() tiling.gotolayout("fullscreen") end)
 
 -- If you want to set the layouts that are enabled
 tiling.set('layouts', {
