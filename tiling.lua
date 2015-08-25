@@ -9,8 +9,28 @@ local alert = require "mjolnir.alert"
 local layouts = require "mjolnir.tiling.layouts"
 local spaces = {}
 local settings = { layouts = {} }
+local layoutIndices = {}
 
 local excluded = {}
+-- navigate to layout by name
+function tiling.gotolayout(name)    
+    if settings.layouts[layoutIndices[name]] == nil then
+        alert.show("Layout " .. name .. " does not exist", 1)
+        return
+    end
+    local space = getspace()
+    -- we want the next layout returned by cycle to be the layout after the layout we go to
+    -- unless it's the last layout, in which case we want it to be the first layout
+    if layoutIndices[name] == #settings.layouts then
+        space.layoutcycle = cycle(settings.layouts, 1)
+    else
+        space.layoutcycle = cycle(settings.layouts, layoutIndices[name] + 1)
+    end
+    space.layout = name
+    alert.show(space.layout, 1)
+    apply(space.windows, space.layout)
+end
+
 function tiling.togglefloat(floatfn)
   local win = window:focusedwindow()
   local id = win:id()
@@ -34,6 +54,12 @@ end
 
 function tiling.set(name, value)
   settings[name] = value
+  -- if layouts are being set, update the indices 
+  if name == "layouts" then
+    for i = 1, #settings.layouts do
+      layoutIndices[settings.layouts[i]] = i 
+    end
+  end
 end
 
 function tiling.retile()
@@ -84,6 +110,16 @@ function apply(windows, layout)
   layouts[layout](windows)
 end
 
+-- return a function that cycles through a table from a starting index
+function cycle(t, start)
+    local i = start
+    return function()
+        local x = t[i]
+        i = i % #t + 1
+        return x
+    end
+end
+
 function iswindowincluded(win)
   onscreen = win:screen() == screen.mainscreen()
   standard = win:isstandard()
@@ -112,7 +148,7 @@ function getspace()
 
   if #spaces == 0 or spaces[1].matches == 0 then
     space.windows = windows
-    space.layoutcycle = fnutils.cycle(settings.layouts)
+    space.layoutcycle = cycle(settings.layouts, 1)
     space.layout = settings.layouts[1]
     table.insert(spaces, space)
   else
@@ -149,6 +185,8 @@ function setlayouts(layouts)
   for k, v in pairs(layouts) do
     n = n + 1
     settings.layouts[n] = k
+    -- record indices so we can retrieve layout by name from settings
+    layoutIndices[k] = n
   end
 end
 
