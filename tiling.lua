@@ -110,7 +110,7 @@ function apply(windows, layout)
   layouts[layout](windows)
 end
 
--- return a function that cycles through a table from a starting index
+-- return a function that cycles through an array from a starting index
 function cycle(t, start)
     local i = start
     return function()
