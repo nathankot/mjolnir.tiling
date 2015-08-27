@@ -11,6 +11,22 @@ local spaces = {}
 local settings = { layouts = {} }
 
 local excluded = {}
+-- navigate to layout by name
+function tiling.gotolayout(name)
+  local space = getspace()
+  local i = 0
+  while space.layout ~= name and i < #settings.layouts do
+    space.layout = space.layoutcycle()
+    i = i + 1
+  end
+  if i < #settings.layouts then 
+    alert.show(space.layout, 1)
+    apply(space.windows, space.layout)
+  else
+    alert.show('Layout ' .. name .. ' does not exist', 1)
+  end
+end
+
 function tiling.togglefloat(floatfn)
   local win = window:focusedwindow()
   local id = win:id()
