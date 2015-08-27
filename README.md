@@ -100,6 +100,7 @@ luarocks make <latest .rockspec name>
 * [iveney](https://github.com/iveney)
 * [mavant](https://github.com/mavant)
 * [OrBaruk](https://github.com/OrBaruk)
+* [peterjcaulfield](https://github.com/peterjcaulfield)
 
 Thanks <3
 
