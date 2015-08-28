@@ -71,7 +71,7 @@ local function center(window)
   frame.y = (frame.h / 2) - (frame.h / 4)
   frame.w = frame.w / 2
   frame.h = frame.h / 2
-  window:setframe(frame)
+  window:setFrame(frame)
 end
 
 hotkey.bind(mash, "f", function() tiling.togglefloat(center) end)
