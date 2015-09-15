@@ -29,6 +29,7 @@ hotkey.bind(mash, "c", function() tiling.cyclelayout() end)
 hotkey.bind(mash, "j", function() tiling.cycle(1) end)
 hotkey.bind(mash, "k", function() tiling.cycle(-1) end)
 hotkey.bind(mash, "space", function() tiling.promote() end)
+hotkey.bind(mash, "f", function() tiling.gotolayout("fullscreen") end)
 
 -- If you want to set the layouts that are enabled
 tiling.set('layouts', {
@@ -118,6 +119,7 @@ Nathan lists, as contributors to mjolnir.tiling,
 * [iveney](https://github.com/iveney)
 * [mavant](https://github.com/mavant)
 * [OrBaruk](https://github.com/OrBaruk)
+* [peterjcaulfield](https://github.com/peterjcaulfield)
 
 Thanks to Nathan and all these contributors for making mjolnir.tiling, and making it so easy to port over to hammerspoon!
 
