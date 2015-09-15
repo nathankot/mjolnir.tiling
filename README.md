@@ -23,6 +23,7 @@ In your `~/.hammerspoon/init.lua`:
 
 ```lua
 local tiling = require "hs.tiling"
+local hotkey = require "hs.hotkey"
 local mash = {"ctrl", "cmd"}
 
 hotkey.bind(mash, "c", function() tiling.cyclelayout() end)
