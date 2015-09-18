@@ -167,4 +167,27 @@ layouts['gp-horizontal'] = function(windows)
   end
 end
 
+layouts['main-vertical-wide'] = function(windows)
+  local wincount = #windows
+
+  if wincount == 1 then
+    return layouts['fullscreen'](windows)
+  end
+
+  for index, win in pairs(windows) do
+    local frame = win:screen():frame()
+
+    if index == 1 then
+      frame.w = frame.w * 0.6
+    else
+      frame.x = frame.x + frame.w * 0.6 
+      frame.w = frame.w * 0.4
+      frame.h = frame.h / (wincount - 1)
+      frame.y = frame.y + frame.h * (index - 2)
+    end
+
+    win:setFrame(frame)
+  end
+end
+
 return layouts
