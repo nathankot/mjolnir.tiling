@@ -26,11 +26,11 @@ local tiling = require "hs.tiling"
 local hotkey = require "hs.hotkey"
 local mash = {"ctrl", "cmd"}
 
-hotkey.bind(mash, "c", function() tiling.cyclelayout() end)
+hotkey.bind(mash, "c", function() tiling.cycleLayout() end)
 hotkey.bind(mash, "j", function() tiling.cycle(1) end)
 hotkey.bind(mash, "k", function() tiling.cycle(-1) end)
 hotkey.bind(mash, "space", function() tiling.promote() end)
-hotkey.bind(mash, "f", function() tiling.gotolayout("fullscreen") end)
+hotkey.bind(mash, "f", function() tiling.goToLayout("fullscreen") end)
 
 -- If you want to set the layouts that are enabled
 tiling.set('layouts', {
@@ -52,7 +52,7 @@ git pull
 You can define your own layouts like so (please see [layouts.lua](/layouts.lua) for definition examples:)
 
 ```lua
-tiling.addlayout('custom', function(windows)
+tiling.addLayout('custom', function(windows)
   fnutils.each(windows, function(window)
     window:maximize()
   end)
@@ -61,7 +61,7 @@ end)
 
 ## Floating Windows
 
-Using `tiling.togglefloat` you can toggle whether or not a window that is on your desktop will be
+Using `tiling.toggleFloat` you can toggle whether or not a window that is on your desktop will be
 included in your tiling calculations. You can optionally pass in a function as a callback to process
 the window if it was tiled.
 
@@ -76,7 +76,7 @@ local function center(window)
   window:setFrame(frame)
 end
 
-hotkey.bind(mash, "f", function() tiling.togglefloat(center) end)
+hotkey.bind(mash, "f", function() tiling.toggleFloat(center) end)
 ```
 
 ## Layouts
@@ -100,22 +100,23 @@ I am experimenting with adding support for variable width layouts.
 For now, I have added a variable width variant of `main-vertical`, called
 `main-vertical-variable`. It it just like `main-vertical`, except the
 proportion of the screen filled by the main window is determined by the value
-of the global variable, `mainVert`, which defaults to `0.5`. I've also added
-two functions, `tiling.setMainVert(val)`, which takes a value between `0` and
-`1` (`0.25` means that the main window takes a quarter of the screen, while
-the other windows take the remaining three quarters; `0.75` means that the
-main window takes 3/4 of the screen, while the remaining windows take 1/4, and
-so on) and `tiling.adjustMainVert(factor)`, which takes a negative or positive
-factor by which to adjust the value of `mainVert` (e.g., if `mainVert` is
-`0.5`, then `tiling.adjustMainVert(-0.1)` sets it to `0.4`).
+of the global variable, `mainVertical`, which defaults to `0.5`. I've also
+added two functions, `tiling.setMainVertical(val)`, which takes a value
+between `0` and `1` (`0.25` means that the main window takes a quarter of the
+screen, while the other windows take the remaining three quarters; `0.75`
+means that the main window takes 3/4 of the screen, while the remaining
+windows take 1/4, and so on) and `tiling.adjustMainVertical(factor)`, which
+takes a negative or positive factor by which to adjust the value of
+`mainVertical` (e.g., if `mainVertical` is `0.5`, then
+`tiling.adjustMainVertical(-0.1)` sets it to `0.4`).
 
 Here is how I use them in my `init.lua` (as
 part of a "windows" mode using `hotkeys.modal`:
 
 ```
-w:bind({},"left",  function() tiling.adjustMainVert(-0.05) end)
-w:bind({},"right",  function() tiling.adjustMainVert(0.05) end)
-w:bind({},"=", function() tiling.setMainVert(0.5) end)
+w:bind({},"left",  function() tiling.adjustMainVertical(-0.05) end)
+w:bind({},"right",  function() tiling.adjustMainVertical(0.05) end)
+w:bind({},"=", function() tiling.setMainVertical(0.5) end)
 ```
 
 Once I have all the kinks worked out, I plan to enable this feature for
