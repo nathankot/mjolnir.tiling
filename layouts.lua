@@ -8,9 +8,9 @@ layouts['fullscreen'] = function(windows)
 end
 
 layouts['main-vertical'] = function(windows)
-  local wincount = #windows
+  local winCount = #windows
 
-  if wincount == 1 then
+  if winCount == 1 then
     return layouts['fullscreen'](windows)
   end
 
@@ -22,7 +22,7 @@ layouts['main-vertical'] = function(windows)
     else
       frame.x = frame.x + frame.w / 2
       frame.w = frame.w / 2
-      frame.h = frame.h / (wincount - 1)
+      frame.h = frame.h / (winCount - 1)
       frame.y = frame.y + frame.h * (index - 2)
     end
 
@@ -31,9 +31,9 @@ layouts['main-vertical'] = function(windows)
 end
 
 layouts['main-horizontal'] = function(windows)
-  local wincount = #windows
+  local winCount = #windows
 
-  if wincount == 1 then
+  if winCount == 1 then
     return layouts['fullscreen'](windows)
   end
 
@@ -45,7 +45,7 @@ layouts['main-horizontal'] = function(windows)
     else
       frame.y = frame.y + frame.h / 2
       frame.h = frame.h / 2
-      frame.w = frame.w / (wincount - 1)
+      frame.w = frame.w / (winCount - 1)
       frame.x = frame.x + frame.w * (index - 2)
     end
 
@@ -54,16 +54,16 @@ layouts['main-horizontal'] = function(windows)
 end
 
 layouts['columns'] = function(windows)
-  local wincount = #windows
+  local winCount = #windows
 
-  if wincount == 1 then
+  if winCount == 1 then
     return layouts['fullscreen'](windows)
   end
 
   for index, win in pairs(windows) do
     local frame = win:screen():frame()
 
-    frame.w = frame.w / wincount
+    frame.w = frame.w / winCount
     frame.x = frame.x + (index - 1) * frame.w
     frame.y = 0
 
@@ -72,16 +72,16 @@ layouts['columns'] = function(windows)
 end
 
 layouts['rows'] = function(windows)
-  local wincount = #windows
+  local winCount = #windows
 
-  if wincount == 1 then
+  if winCount == 1 then
     return layouts['fullscreen'](windows)
   end
 
   for index, win in pairs(windows) do
     local frame = win:screen():frame()
 
-    frame.h = frame.h / wincount
+    frame.h = frame.h / winCount
     frame.y = frame.y + (index - 1) * frame.h
     frame.x = 0
 
@@ -90,9 +90,9 @@ layouts['rows'] = function(windows)
 end
 
 layouts['gp-vertical'] = function(windows)
-  local wincount = #windows
+  local winCount = #windows
 
-  if wincount == 1 then
+  if winCount == 1 then
     return layouts['fullscreen'](windows)
   end
 
@@ -108,12 +108,12 @@ layouts['gp-vertical'] = function(windows)
       height = frame.h
       width  = frame.w / 2
     elseif index % 2 == 0 then
-      if index ~= wincount then
+      if index ~= winCount then
         height = height / 2
       end
       x = x + width
     else 
-      if index ~= wincount then
+      if index ~= winCount then
         width = width / 2
       end
       y = y + height
@@ -129,9 +129,9 @@ layouts['gp-vertical'] = function(windows)
 end
 
 layouts['gp-horizontal'] = function(windows)
-  local wincount = #windows
+  local winCount = #windows
 
-  if wincount == 1 then
+  if winCount == 1 then
     return layouts['fullscreen'](windows)
   end
 
@@ -147,12 +147,12 @@ layouts['gp-horizontal'] = function(windows)
       height = frame.h / 2
       width  = frame.w 
     elseif index % 2 == 0 then
-      if index ~= wincount then
+      if index ~= winCount then
         width = width / 2
       end
       y = y + height
     else 
-      if index ~= wincount then
+      if index ~= winCount then
         height = height / 2
       end
       x = x + width
@@ -168,28 +168,28 @@ layouts['gp-horizontal'] = function(windows)
 end
 
 layouts['main-vertical-variable'] = function(windows)
-  local wincount = #windows
+  local winCount = #windows
 
-  if wincount == 1 then
+  if winCount == 1 then
     return layouts['fullscreen'](windows)
   end
 
-  local space = getspace()
-  local mainVert = space.mainVert
+  local space = getSpace()
+  local mainVertical = space.mainVertical
 
-  if mainVert == nil then
-      mainVert = 0.6
+  if mainVertical == nil then
+      mainVertical = 0.5
   end
 
   for index, win in pairs(windows) do
     local frame = win:screen():frame()
 
     if index == 1 then
-      frame.w = frame.w * mainVert 
+      frame.w = frame.w * mainVertical 
     else
-      frame.x = frame.x + frame.w * mainVert 
-      frame.w = frame.w * (1 - mainVert) 
-      frame.h = frame.h / (wincount - 1)
+      frame.x = frame.x + frame.w * mainVertical 
+      frame.w = frame.w * (1 - mainVertical) 
+      frame.h = frame.h / (winCount - 1)
       frame.y = frame.y + frame.h * (index - 2)
     end
 

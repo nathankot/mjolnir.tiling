@@ -12,11 +12,11 @@ local settings = { layouts = {} }
 
 local excluded = {}
 -- navigate to layout by name
-function tiling.gotolayout(name)
-  local space = getspace()
+function tiling.goToLayout(name)
+  local space = getSpace()
   local i = 0
   while space.layout ~= name and i < #settings.layouts do
-    space.layout = space.layoutcycle()
+    space.layout = space.layoutCycle()
     i = i + 1
   end
   if i < #settings.layouts then 
@@ -27,7 +27,7 @@ function tiling.gotolayout(name)
   end
 end
 
-function tiling.togglefloat(floatfn)
+function tiling.toggleFloat(floatfn)
   local win = window:focusedWindow()
   local id = win:id()
   excluded[id] = not excluded[id]
@@ -39,13 +39,13 @@ function tiling.togglefloat(floatfn)
     alert.show("Adding " .. win:title() .. " to tiles")
   end
 
-  local space = getspace()
+  local space = getSpace()
   apply(space.windows, space.layout)
 end
 
-function tiling.addlayout(name, layout)
+function tiling.addLayout(name, layout)
   layouts[name] = layout
-  setlayouts(layouts)
+  setLayouts(layouts)
 end
 
 function tiling.set(name, value)
@@ -53,38 +53,38 @@ function tiling.set(name, value)
 end
 
 function tiling.retile()
-  local space = getspace()
+  local space = getSpace()
   apply(space.windows, space.layout)
 end
 
 function tiling.cycle(direction)
-  local space = getspace()
+  local space = getSpace()
   local windows = space.windows
   local win = window:focusedWindow() or windows[1]
   local direction = direction or 1
-  local currentindex = fnutils.indexOf(windows, win)
+  local currentIndex = fnutils.indexOf(windows, win)
   local layout = space.layout
-  if not currentindex then return end
+  if not currentIndex then return end
   nextindex = currentindex + direction
-  if nextindex > #windows then
-    nextindex = 1
-  elseif nextindex < 1 then
-    nextindex = #windows
+  if nextIndex > #windows then
+    nextIndex = 1
+  elseif nextIndex < 1 then
+    nextIndex = #windows
   end
 
-  windows[nextindex]:focus()
+  windows[nextIndex]:focus()
   apply(windows, layout)
 end
 
-function tiling.cyclelayout()
-  local space = getspace()
-  space.layout = space.layoutcycle()
+function tiling.cycleLayout()
+  local space = getSpace()
+  space.layout = space.layoutCycle()
   alert.show(space.layout, 1)
   apply(space.windows, space.layout)
 end
 
 function tiling.promote()
-  local space = getspace()
+  local space = getSpace()
   local windows = space.windows
   local win = window:focusedWindow() or windows[1]
   local i = fnutils.indexOf(windows, win)
@@ -96,39 +96,42 @@ function tiling.promote()
   apply(windows, space.layout)
 end
 
-function tiling.setMainVert(val)
+function tiling.setMainVertical(val)
     if val > 0 and val < 1 then
-        local space = getspace()
-        space.mainVert = val
-        tiling.gotolayout('main-vertical-variable')
+        local space = getSpace()
+        if space.layout == 'main-vertical-variable' then
+            space.mainVertical = val
+            tiling.retile()
+        end
     end
 end
 
-function tiling.adjustMainVert(factor)
-    local space = getspace()
-    local mainVert = space.mainVert
-    if mainVert == nil then
-        mainVert = 0.5
+function tiling.adjustMainVertical(factor)
+    local space = getSpace()
+    if space.layout == 'main-vertical-variable' then
+        local mainVertical = space.mainVertical
+        if mainVertical == nil then
+            mainVertical = 0.5
+        end
+        tiling.setMainVertical(mainVertical + factor)
     end
-    newval = mainVert + factor
-    tiling.setMainVert(newval)
 end
 
 function apply(windows, layout)
   layouts[layout](windows)
 end
 
-function iswindowincluded(win)
-  onscreen = win:screen() == screen.mainScreen()
+function isWindowIncluded(win)
+  onScreen = win:screen() == screen.mainScreen()
   standard = win:isStandard()
-  hastitle = #win:title() > 0
-  istiling = not excluded[win:id()]
-  return onscreen and standard and hastitle and istiling
+  hasTitle = #win:title() > 0
+  isTiling = not excluded[win:id()]
+  return onScreen and standard and hasTitle and isTiling
 end
 
 -- Infer a 'space' from our existing spaces
-function getspace()
-  local windows = fnutils.filter(window.visibleWindows(), iswindowincluded)
+function getSpace()
+  local windows = fnutils.filter(window.visibleWindows(), isWindowIncluded)
 
   fnutils.each(spaces, function(space)
     local matches = 0
@@ -146,25 +149,25 @@ function getspace()
 
   if #spaces == 0 or spaces[1].matches == 0 then
     space.windows = windows
-    space.layoutcycle = fnutils.cycle(settings.layouts)
+    space.layoutCycle = fnutils.cycle(settings.layouts)
     space.layout = settings.layouts[1]
     table.insert(spaces, space)
   else
     space = spaces[1]
   end
 
-  space.windows = syncwindows(space.windows, windows)
+  space.windows = syncWindows(space.windows, windows)
   return space
 end
 
-function syncwindows(windows, newwindows)
+function syncWindows(windows, newWindows)
   -- Remove any windows no longer around
   windows = fnutils.filter(windows, function(win)
-    return fnutils.contains(newwindows, win)
+    return fnutils.contains(newWindows, win)
   end)
 
   -- Add any new windows since
-  fnutils.each(newwindows, function(win)
+  fnutils.each(newWindows, function(win)
     if fnutils.contains(windows, win) == false then
       table.insert(windows, win)
     end
@@ -178,7 +181,7 @@ function syncwindows(windows, newwindows)
   return windows
 end
 
-function setlayouts(layouts)
+function setLayouts(layouts)
   local n = 0
   for k, v in pairs(layouts) do
     n = n + 1
@@ -186,6 +189,7 @@ function setlayouts(layouts)
   end
 end
 
-setlayouts(layouts)
+
+setLayouts(layouts)
 
 return tiling
