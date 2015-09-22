@@ -96,6 +96,21 @@ function tiling.promote()
   apply(windows, space.layout)
 end
 
+function tiling.setMainVert(val)
+    if val > 0 and val < 1 then
+        mainVert = val
+        tiling.gotolayout('main-vertical-variable')
+    end
+end
+
+function tiling.adjustMainVert(factor)
+    if mainVert == nil then
+        mainVert = 0.5
+    end
+    newval = mainVert + factor
+    tiling.setMainVert(newval)
+end
+
 function apply(windows, layout)
   layouts[layout](windows)
 end

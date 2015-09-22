@@ -93,6 +93,33 @@ Name						                            | Screenshot
 `gp-vertical`                               | ![gp-vertical](https://raw.github.com/dsanson/hs.tiling/master/screenshots/gp-vertical.png)
 `gp-horizontal`                             | ![gp-horizontal](https://raw.github.com/dsanson/hs.tiling/master/screenshots/gp-horizontal.png)
 
+## Variable Layouts
+
+I am experimenting with adding support for variable width layouts. For now,
+I have added a variable width variant of `main-vertical`, called `main-vertical-variable`. It it just like
+`main-vertical`, except the proportion of the screen filled by the main window
+is determined by the value of the global variable, `mainVert`, which defaults
+to `0.5`. I've also added two functions, `tiling.setMainVert(val)`, which
+takes a value between `0` and `1` (`0.25` means that the main window takes a
+quarter of the screen, while the other windows take the remaining three
+quarters; `0.75` means that the main window takes 3/4 of the screen, while the
+remaining windows take 1/4, and so on) and
+`tiling.adjustMainVert(factor)`, which takes a negative or positive factor by
+which to adjust the value of `mainVert` (e.g., if `mainVert` is `0.5`, then
+`tiling.adjustMainVert(-0.1)` sets it to `0.4`). 
+
+Here is how I use them in my `init.lua` (as
+part of a "windows" mode using `hotkeys.modal`:
+
+```
+w:bind({},"left",  function() tiling.adjustMainVert(-0.05) end)
+w:bind({},"right",  function() tiling.adjustMainVert(0.05) end)
+w:bind({},"=", function() tiling.setMainVert(0.5) end)
+```
+
+Once I have all the kinks worked out, I plan to enable this feature for
+`main-vertical` and `gp-vertical`, as well as a corresponding feature for
+`main-horizontal` and `gp-horizontal`.
 
 ## Contributing
 
