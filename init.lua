@@ -98,12 +98,15 @@ end
 
 function tiling.setMainVert(val)
     if val > 0 and val < 1 then
-        mainVert = val
+        local space = getspace()
+        space.mainVert = val
         tiling.gotolayout('main-vertical-variable')
     end
 end
 
 function tiling.adjustMainVert(factor)
+    local space = getspace()
+    local mainVert = space.mainVert
     if mainVert == nil then
         mainVert = 0.5
     end

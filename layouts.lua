@@ -174,6 +174,9 @@ layouts['main-vertical-variable'] = function(windows)
     return layouts['fullscreen'](windows)
   end
 
+  local space = getspace()
+  local mainVert = space.mainVert
+
   if mainVert == nil then
       mainVert = 0.6
   end
