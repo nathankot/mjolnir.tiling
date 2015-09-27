@@ -65,7 +65,7 @@ function tiling.cycle(direction)
   local currentIndex = fnutils.indexOf(windows, win)
   local layout = space.layout
   if not currentIndex then return end
-  nextindex = currentindex + direction
+  nextIndex = currentIndex + direction
   if nextIndex > #windows then
     nextIndex = 1
   elseif nextIndex < 1 then
