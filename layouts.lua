@@ -1,9 +1,16 @@
 local fnutils = require "hs.fnutils"
 local layouts = {}
 
+local fullscreenMaxWidth = 2024
+
 layouts['fullscreen'] = function(windows)
   fnutils.each(windows, function(window)
-    window:maximize()
+    local frame = window:screen():frame()
+    local width = math.min(fullscreenMaxWidth, frame.w)
+
+    frame.x = frame.x + (frame.w - width) / 2
+    frame.w = width
+    window:setFrame(frame)
   end)
 end
 
@@ -96,7 +103,7 @@ layouts['gp-vertical'] = function(windows)
     return layouts['fullscreen'](windows)
   end
 
-  local width 
+  local width
   local height
   local x = 0
   local y = 0
@@ -112,13 +119,13 @@ layouts['gp-vertical'] = function(windows)
         height = height / 2
       end
       x = x + width
-    else 
+    else
       if index ~= winCount then
         width = width / 2
       end
       y = y + height
     end
-  
+
     frame.x = frame.x + x
     frame.y = frame.y + y
     frame.w = width
@@ -135,29 +142,29 @@ layouts['gp-horizontal'] = function(windows)
     return layouts['fullscreen'](windows)
   end
 
-  local width 
+  local width
   local height
   local x = 0
   local y = 0
 
   for index, win in pairs(windows) do
     local frame = win:screen():frame()
-  
+
     if index == 1 then
       height = frame.h / 2
-      width  = frame.w 
+      width  = frame.w
     elseif index % 2 == 0 then
       if index ~= winCount then
         width = width / 2
       end
       y = y + height
-    else 
+    else
       if index ~= winCount then
         height = height / 2
       end
       x = x + width
     end
-  
+
     frame.x = frame.x + x
     frame.y = frame.y + y
     frame.w = width
@@ -185,10 +192,10 @@ layouts['main-vertical-variable'] = function(windows)
     local frame = win:screen():frame()
 
     if index == 1 then
-      frame.w = frame.w * mainVertical 
+      frame.w = frame.w * mainVertical
     else
-      frame.x = frame.x + frame.w * mainVertical 
-      frame.w = frame.w * (1 - mainVertical) 
+      frame.x = frame.x + frame.w * mainVertical
+      frame.w = frame.w * (1 - mainVertical)
       frame.h = frame.h / (winCount - 1)
       frame.y = frame.y + frame.h * (index - 2)
     end
