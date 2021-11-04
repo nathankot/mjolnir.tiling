@@ -28,7 +28,7 @@ function tiling.goToLayout(name)
 end
 
 function tiling.toggleFloat(floatfn)
-  local win = window:focusedWindow()
+  local win = window.focusedWindow()
   local id = win:id()
   excluded[id] = not excluded[id]
 
@@ -60,7 +60,7 @@ end
 function tiling.cycle(direction)
   local space = getSpace()
   local windows = space.windows
-  local win = window:focusedWindow()
+  local win = window.focusedWindow()
   local direction = direction or 1
   local currentIndex = fnutils.indexOf(windows, win)
   local layout = space.layout
@@ -86,7 +86,7 @@ end
 function tiling.promote()
   local space = getSpace()
   local windows = space.windows
-  local win = window:focusedWindow()
+  local win = window.focusedWindow()
   local i = fnutils.indexOf(windows, win)
   if not i then return end
 
