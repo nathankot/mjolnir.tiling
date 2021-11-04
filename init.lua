@@ -19,7 +19,7 @@ function tiling.goToLayout(name)
     space.layout = space.layoutCycle()
     i = i + 1
   end
-  if i < #settings.layouts then 
+  if i < #settings.layouts then
     alert.show(space.layout, 1)
     apply(space.windows, space.layout)
   else
@@ -60,7 +60,7 @@ end
 function tiling.cycle(direction)
   local space = getSpace()
   local windows = space.windows
-  local win = window:focusedWindow() or windows[1]
+  local win = window:focusedWindow()
   local direction = direction or 1
   local currentIndex = fnutils.indexOf(windows, win)
   local layout = space.layout
@@ -86,7 +86,7 @@ end
 function tiling.promote()
   local space = getSpace()
   local windows = space.windows
-  local win = window:focusedWindow() or windows[1]
+  local win = window:focusedWindow()
   local i = fnutils.indexOf(windows, win)
   if not i then return end
 
